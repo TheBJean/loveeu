@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 Meses de Amor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(255, 182, 193, 0.3);
+            animation: float 6s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .title h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+        }
+
+        .timer {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .message {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+            position: relative;
+            z-index: 1;
+        }
+
+        .message p {
+            margin-bottom: 1.5rem;
+        }
+
+        .signature {
+            text-align: right;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem;
+            }
+
+            .title h1 {
+                font-size: 2.5rem;
+            }
+
+            .message {
+                font-size: 1rem;
+            }
+
+            .carousel-container {
+                height: 60vh; /* Ajusta la altura del carrusel en móviles */
+            }
+        }
+
+        .carousel-container {
+            width: 100%;
+            height: 800px;
+            position: relative;
+            overflow: hidden;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-button:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #ff6b6b;
+        }
+
+        .spotify-link {
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.2rem;
+        }
+
+        .spotify-link a {
+            color: #1DB954; /* Color verde de Spotify */
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .spotify-link a:hover {
+            color: #1ed760; /* Verde más brillante al pasar el ratón */
+        }
+
+        .spotify-link i {
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hearts" id="hearts"></div>
+        <div class="title">
+            <h1>💞 Te Amo 💞</h1>
+            <div class="timer" id="timer"></div>
+        </div>
+        <div class="message">
+            <p>La verdad ha pasado tanto tiempo, ya 7 meses, quiero decirte lo mucho q te amo y lo tanto que he sido feliz a tu lado a pesar de tantas cosas… y es q cuando cierro los ojos, todavía puedo ver ese primer "hola" que me cambió la vida. No fue un saludo común, fue una chispa sin mas.</p>
+            <p>Me acuerdo de las primeras risas, de las conversaciones q duraban hasta que nos daba sueño, de esos silencios q no incomodaban, sino q abrazaban. Me acuerdo de los días buenos y de los no tan buenos, pero sobre todo, me acuerdo de cómo, en cada uno de ellos, siempre estabas tú. A veces en un mensaje, a veces en una mirada q cruzaba pantallas, pero siempre estabas.</p>
+            
+            <div class="carousel-container">
+                <div class="carousel">
+                    <div class="carousel-item">
+                        <img src="lucii.jpg" alt="Memoria 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="lucii2.jpg" alt="Memoria 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="luciii3.jpg" alt="Memoria 3">
+                    </div>
+                </div>
+                <button class="carousel-button prev">❮</button>
+                <button class="carousel-button next">❯</button>
+                <div class="carousel-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+
+            <p>Estos 7 meses no han sido solo tiempo. Han sido historia. Han sido batallas ganadas, abrazos a la distancia, y promesas q se tejen con hilos invisibles pero irrompibles. Han sido aprendizajes, han sido fuerza, han sido amor del bueno, del q no se rinde.</p>
+            <p>Quiero q sepas q cada día contigo ha sido un regalo. Tú eres mi calma, mi locura bonita, mi risa favorita y mi lugar seguro.</p>
+            <p>Así q gracias, por existir, por elegirme, por quedarte. Por estos 7 meses q saben a magia. Y si me preguntas si volvería a pasar por todo esto contigo, la respuesta es sí. Mil veces sí.</p>
+            <p>Te amo, y lo haré siempre. Pase lo q pase, estés donde estés.</p>
+
+            <div class="spotify-link">
+                <iframe src="https://open.spotify.com/embed/track/1yXiLIBmJau1WnLruUy3k5?si=36e616bc208b404c" width="100%" height="152" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </div>
+
+        </div>
+        <div class="signature">Con todo mi amor ❤️</div>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            document.getElementById('hearts').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        setInterval(createHeart, 300);
+
+        // Carrusel de imágenes
+        const carousel = document.querySelector('.carousel');
+        const items = document.querySelectorAll('.carousel-item');
+        const dots = document.querySelectorAll('.dot');
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % items.length;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            updateCarousel();
+        }
+
+        nextButton.addEventListener('click', nextSlide);
+        prevButton.addEventListener('click', prevSlide);
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+            });
+        });
+
+        // Auto-avance del carrusel cada 5 segundos
+        setInterval(nextSlide, 5000);
+
+        // Recupera el tiempo almacenado o establece el tiempo inicial
+        let totalSeconds = localStorage.getItem('totalSeconds') ? parseInt(localStorage.getItem('totalSeconds')) : (7 * 30 * 24 * 60 * 60 + 55 * 60 + 42); // 7 meses en segundos + 55 minutos + 42 segundos
+
+        function updateTimer() {
+            const days = Math.floor(totalSeconds / (24 * 60 * 60));
+            const hours = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
+            const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+            const seconds = totalSeconds % 60;
+
+            document.getElementById('timer').innerText = `${days} días, ${hours} horas, ${minutes} minutos y ${seconds} segundos`;
+            totalSeconds++; // Incrementa el tiempo
+            localStorage.setItem('totalSeconds', totalSeconds); // Almacena el tiempo actualizado
+        }
+
+        setInterval(updateTimer, 1000); // Actualiza cada segundo
+        updateTimer(); // Llama a la función una vez al cargar la página
+    </script>
+</body>
+</html>
